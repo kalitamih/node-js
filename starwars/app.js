@@ -3,6 +3,17 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+const constants = require('./constants');
+
+const { LinkMongoDB } = constants;
+
+mongoose.connect(LinkMongoDB, { useNewUrlParser: true }).then(() => {
+  console.log('Connected to Database');
+}).catch((err) => {
+  console.log('Not Connected to Database ERROR!', err);
+});
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');

@@ -1,25 +1,35 @@
 doctype html  
 html(lang='en')  
  head
-   title Pug demo
+   title Main page
    link(rel='stylesheet', href='/stylesheets/select.css')
+   link(
+    rel='stylesheet',
+    href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css',
+    integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T',
+    crossorigin='anonymous',
+  )
  body
-  form(action='http://localhost:3000/info', method='POST', name='formBillingOwner')
-    mixin select(title, options)           
-      select(name= title).select
-        for item in JSON.parse(options)      
-          option(value= item, name= item)= item
+  form(action='http://localhost:3000/people', method='POST', name='select')
+    mixin select(title, options, name)
+      div.select
+        h5= title           
+        select(name= name).select        
+          for item in JSON.parse(options)      
+            option(value= item, name= item)= item
 
-    +select('Name', name)
+    +select('Name:', name, 'name')
 
-    +select('Birth Year', birthYear)
+    +select('Birth Year:', birthYear, 'birth_year')
 
-    +select('Eyes', eyes)
+    +select('Eyes:', eyes, 'eye_color')
 
-    +select('Hair', hair)
+    +select('Hair', hair, 'hair_color')
 
-    +select('Mass', mass)
+    +select('Mass', mass, 'mass')
 
-    +select('Skin', skin)
+    +select('Skin', skin, 'skin_color')
 
-    input(type="submit", value="Отправить")
+    +select('Height', height, 'height')
+
+    button(type="submit").btn.btn-primary.button Submit

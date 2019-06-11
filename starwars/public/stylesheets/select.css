@@ -4,15 +4,19 @@ form {
 }
 
 select {
-  height: 30px;
-  width: 200px;
-  margin: 10px 0px;
+  height: 25px;
+  width: 100px;  
 }
 
-.select {
-  display: flex;
+.select {  
   width: 270px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  margin: 3px auto; 
+}
+
+.button.btn {
+  display: block;
+  margin: 20px auto;
+  width: 100px;
+  height: 50px;
+  font-size: 20px;
 }

@@ -39,8 +39,9 @@ exports.getSelect = (req, res, next) => {
         eyes: JSON.stringify([...array, ...docs[0].eye_color]),
         gender: JSON.stringify([...array, ...docs[0].gender]),
         hair: JSON.stringify([...array, ...docs[0].hair_color]),
-        mass: JSON.stringify([...array, ...docs[0].hair_color]),
-        skin: JSON.stringify([...array, ...docs[0].hair_color]),
+        mass: JSON.stringify([...array, ...docs[0].mass]),
+        skin: JSON.stringify([...array, ...docs[0].skin_color]),
+        height: JSON.stringify([...array, ...docs[0].height]),
       });
     })
     .catch(err => console.log(err));

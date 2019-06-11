@@ -10,13 +10,8 @@ router.post('/', peopleController.postAddPeople);
 
 router.post('/select', selectController.postAddSelect);
 
-router.get('/select', selectController.getSelect);
+router.get('/', selectController.getSelect);
 
-router.post('/info', peopleController.postDisplayPeople);
-
-/* GET home page. */
-router.get('/', (req, res) => {
-  res.render('index', { title: 'Express' });
-});
+router.post('/people', peopleController.postDisplayPeople);
 
 module.exports = router;

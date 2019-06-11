@@ -37,5 +37,28 @@ exports.postAddPeople = (req, res, next) => {
 };
 
 exports.postDisplayPeople = (req, res, next) => {
-  console.log(req.body);
+  const obj = JSON.parse(JSON.stringify(req.body));
+  
+  if (!obj.name) delete obj.name;
+  if (!obj.mass) delete obj.mass;
+  if (!obj.birth_year) delete obj.birth_year;
+  if (!obj.eye_color) delete obj.eye_color;
+  if (!obj.skin_color) delete obj.skin_color;
+  if (!obj.hair_color) delete obj.hair_color;
+  if (!obj.height) delete obj.height;
+
+  console.log(obj);
+
+  People
+    .find(obj)
+    .then((people) => {
+      console.log(people);
+      if (people.length) {
+        res.render('people', {
+          people: JSON.stringify(people),
+        });
+      } else {
+        res.render('nothing');
+      }
+    });
 };

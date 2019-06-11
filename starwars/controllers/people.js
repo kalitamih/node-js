@@ -1,6 +1,6 @@
 const People = require('../models/people');
 
-exports.postAddPeople = (req, res, next) => {  
+exports.postAddPeople = (req, res, next) => {
   const {
     name, birth_year, eye_color,
     gender, hair_color, height,

@@ -17,7 +17,7 @@ const peopleSchema = new Schema({
   },
   gender: {
     type: String,
-    enum: ['male', 'female', 'unknown', 'n/a'],
+    enum: ['male', 'female', 'unknown', 'n/a', 'none', 'hermaphrodite'],
     required: true,
   },
   hair_color: {

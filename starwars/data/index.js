@@ -97,7 +97,6 @@ const retrieveData = (resource) => {
         headers,
         body: JSON.stringify(data),
       });
-
     });
 };
 

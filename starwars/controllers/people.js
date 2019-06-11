@@ -35,3 +35,7 @@ exports.postAddPeople = (req, res, next) => {
       console.log(err);
     });
 };
+
+exports.postDisplayPeople = (req, res, next) => {
+  console.log(req.body);
+};

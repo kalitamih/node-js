@@ -1,0 +1,25 @@
+doctype html  
+html(lang='en')  
+ head
+   title Pug demo
+   link(rel='stylesheet', href='/stylesheets/select.css')
+ body
+  form(action='http://localhost:3000/info', method='POST', name='formBillingOwner')
+    mixin select(title, options)           
+      select(name= title).select
+        for item in JSON.parse(options)      
+          option(value= item, name= item)= item
+
+    +select('Name', name)
+
+    +select('Birth Year', birthYear)
+
+    +select('Eyes', eyes)
+
+    +select('Hair', hair)
+
+    +select('Mass', mass)
+
+    +select('Skin', skin)
+
+    input(type="submit", value="Отправить")

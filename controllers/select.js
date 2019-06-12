@@ -1,5 +1,9 @@
 const Select = require('../models/select');
 
+const constants = require('../constants');
+
+const { LINK_SERVER } = constants;
+
 exports.postAddSelect = (req, res) => {
   const {
     name, birth_year, eye_color,
@@ -53,8 +57,9 @@ exports.getSelect = (req, res) => {
         ),
         skin: JSON.stringify([...array, ...select.skin_color]),
         height: JSON.stringify(
-          [...array, ...select.height].filter(item => heightRegex.test(item)),
+          [...array, ...select.height].filter(item => heightRegex.test(item)),         
         ),
+        link: `${LINK_SERVER}people`, 
       });
     })
     .catch(() => {

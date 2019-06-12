@@ -57,9 +57,9 @@ exports.getSelect = (req, res) => {
         ),
         skin: JSON.stringify([...array, ...select.skin_color]),
         height: JSON.stringify(
-          [...array, ...select.height].filter(item => heightRegex.test(item)),         
+          [...array, ...select.height].filter(item => heightRegex.test(item)),
         ),
-        link: `${LINK_SERVER}people`, 
+        link: `${LINK_SERVER}people`,
       });
     })
     .catch(() => {

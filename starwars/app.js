@@ -17,7 +17,6 @@ mongoose.connect(LINK_MONGODB, { useNewUrlParser: true }).then(() => {
 
 const indexRouter = require('./routes/index');
 
-
 const app = express();
 
 // view engine setup

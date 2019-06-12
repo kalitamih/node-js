@@ -84,11 +84,11 @@ const reqAddRecords = arr => ( // Add info about character in MongoDB (collectio
 
 const saveSelectObject = () => { // Save object to create select options
   const keys = Object.keys(selectObj);
+  const notValidArray = ['unknown', 'n/a'];
 
   for (let i = 0; i < keys.length; i += 1) {
-    if (keys[i] !== 'count') {
-      selectObj[keys[i]] = Array.from(selectObj[keys[i]]);
-    }
+    const checkNoneData = item => !notValidArray.includes(item);
+    selectObj[keys[i]] = Array.from(selectObj[keys[i]]).filter(checkNoneData);
   }
 
   return Select.deleteMany({})

@@ -15,5 +15,5 @@ module.exports.selectObj = {
   hair_color: hairColorSet,
   height: heightSet,
   mass: massSet,
-  skin_color: skinColorSet, 
+  skin_color: skinColorSet,
 };

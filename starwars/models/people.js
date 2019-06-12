@@ -9,6 +9,12 @@ const peopleSchema = new Schema({
   },
   birth_year: {
     type: String,
+    validate: {
+      validator: v => (
+        /^[\d.]{1,4}BBY$|^unknown$/.test(v)
+      ),
+      message: props => `${props.value} is not a valid year!`,
+    },
     required: true,
   },
   eye_color: {
@@ -26,10 +32,22 @@ const peopleSchema = new Schema({
   },
   height: {
     type: String,
+    validate: {
+      validator: v => (
+        /^\d{1,3}$|^unknown$/.test(v)
+      ),
+      message: props => `${props.value} is not a valid height!`,
+    },
     required: true,
   },
   mass: {
     type: String,
+    validate: {
+      validator: v => (
+        /^[\d.,]{1,5}$|^unknown$/.test(v)
+      ),
+      message: props => `${props.value} is not a valid mass!`,
+    },
     required: true,
   },
   skin_color: {
@@ -38,6 +56,12 @@ const peopleSchema = new Schema({
   },
   homeworld: {
     type: String,
+    validate: {
+      validator: v => (
+        /^https:\/\/swapi.co\/api\/planets\/\d{1,2}\/$/.test(v)
+      ),
+      message: props => `${props.value} is not a valid homeworld!`,
+    },
     required: true,
   },
   films: {
@@ -58,6 +82,12 @@ const peopleSchema = new Schema({
   },
   url: {
     type: String,
+    validate: {
+      validator: v => (
+        /^https:\/\/swapi.co\/api\/people\/\d{1,2}\/$/.test(v)
+      ),
+      message: props => `${props.value} is not a valid url!`,
+    },
     required: true,
   },
   created: {

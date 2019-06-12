@@ -7,9 +7,9 @@ const mongoose = require('mongoose');
 
 const constants = require('./constants');
 
-const { LinkMongoDB } = constants;
+const { LINK_MONGODB } = constants;
 
-mongoose.connect(LinkMongoDB, { useNewUrlParser: true }).then(() => {
+mongoose.connect(LINK_MONGODB, { useNewUrlParser: true }).then(() => {
   console.log('Connected to Database');
 }).catch((err) => {
   console.log('Not Connected to Database ERROR!', err);

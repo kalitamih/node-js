@@ -1,6 +1,6 @@
 const People = require('../models/people');
 
-exports.postAddPeople = (req, res, next) => {
+exports.postAddPeople = (req, res) => {
   const {
     name, birth_year, eye_color,
     gender, hair_color, height,
@@ -29,30 +29,26 @@ exports.postAddPeople = (req, res, next) => {
   people
     .save()
     .then(() => {
-      console.log('Created Product');
+      res.status(201).send('Record about person was created');
     })
     .catch((err) => {
-      console.log(err);
+      console.log(`Record about person wasn't created. ${err}`);
+      res.status(500).send(`Record about person wasn't created. ${err}`);
     });
 };
 
-exports.postDisplayPeople = (req, res, next) => {
-  const obj = JSON.parse(JSON.stringify(req.body));
-  
-  if (!obj.name) delete obj.name;
-  if (!obj.mass) delete obj.mass;
-  if (!obj.birth_year) delete obj.birth_year;
-  if (!obj.eye_color) delete obj.eye_color;
-  if (!obj.skin_color) delete obj.skin_color;
-  if (!obj.hair_color) delete obj.hair_color;
-  if (!obj.height) delete obj.height;
+exports.postDisplayPeople = (req, res) => {
+  const reqObj = JSON.parse(JSON.stringify(req.body));
 
-  console.log(obj);
+  const keys = Object.keys(reqObj);
+
+  keys.forEach((key) => {
+    if (!reqObj[key]) delete reqObj[key];
+  });
 
   People
-    .find(obj)
+    .find(reqObj)
     .then((people) => {
-      console.log(people);
       if (people.length) {
         res.render('people', {
           people: JSON.stringify(people),
@@ -60,5 +56,8 @@ exports.postDisplayPeople = (req, res, next) => {
       } else {
         res.render('nothing');
       }
+    })
+    .catch(() => {
+      res.status(500).render('error');
     });
 };

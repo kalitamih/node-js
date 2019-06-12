@@ -1,6 +1,6 @@
 const Select = require('../models/select');
 
-exports.postAddSelect = (req, res, next) => {
+exports.postAddSelect = (req, res) => {
   const {
     name, birth_year, eye_color,
     gender, hair_color, height,
@@ -20,29 +20,33 @@ exports.postAddSelect = (req, res, next) => {
   people
     .save()
     .then(() => {
-      console.log('Created Select');
+      console.log('Collection \'select\' was created');
+      res.status(201).send('Collection \'select\' was created');
     })
     .catch((err) => {
-      console.log(err);
+      console.log(`Collection 'select' not created. ${err}`);
+      res.status(500).send(`Collection 'select' not created. ${err}`);
     });
 };
 
-exports.getSelect = (req, res, next) => {
+exports.getSelect = (req, res) => {
   Select.find()
     .exec()
     .then((docs) => {
-      console.log(docs[0]);
       const array = [''];
+      const [select] = docs;
       res.render('select', {
-        name: JSON.stringify([...array, ...docs[0].name]),
-        birthYear: JSON.stringify([...array, ...docs[0].birth_year]),
-        eyes: JSON.stringify([...array, ...docs[0].eye_color]),
-        gender: JSON.stringify([...array, ...docs[0].gender]),
-        hair: JSON.stringify([...array, ...docs[0].hair_color]),
-        mass: JSON.stringify([...array, ...docs[0].mass]),
-        skin: JSON.stringify([...array, ...docs[0].skin_color]),
-        height: JSON.stringify([...array, ...docs[0].height]),
+        name: JSON.stringify([...array, ...select.name]),
+        birthYear: JSON.stringify([...array, ...select.birth_year]),
+        eyes: JSON.stringify([...array, ...select.eye_color]),
+        gender: JSON.stringify([...array, ...select.gender]),
+        hair: JSON.stringify([...array, ...select.hair_color]),
+        mass: JSON.stringify([...array, ...select.mass]),
+        skin: JSON.stringify([...array, ...select.skin_color]),
+        height: JSON.stringify([...array, ...select.height]),
       });
     })
-    .catch(err => console.log(err));
+    .catch(() => {
+      res.status(500).render('error');
+    });
 };

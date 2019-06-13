@@ -63,6 +63,8 @@ exports.getSelect = (req, res) => {
       });
     })
     .catch(() => {
-      res.status(500).render('error');
+      res.status(500).render('error', {
+        link: LINK_SERVER,
+      });
     });
 };

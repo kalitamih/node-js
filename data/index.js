@@ -69,16 +69,39 @@ const createSelectObj = (person) => { // Collect unique data to display in selec
   return null;
 };
 
-const reqAddRecords = arr => ( // Add info about character in MongoDB (collection)
-  arr.map((person) => {
-    createSelectObj(person);
-    return fetch(LINK_SERVER, {
-      method,
-      headers,
-      body: JSON.stringify(person),
-    })
-      .then(response => handleErrors(response))
-      .catch(err => (console.log(`Data about ${person.name} not added in MongoDB. ${err}`)));
+const reqAddRecords = people => ( // Add info about character in MongoDB (collection)
+  new Promise((resolve) => {
+    let addedPeople = 0;
+    let rejectedPeople = 0;
+
+    const finishAddData = () => { // Check finish of downloading data from swapi.co
+      if (addedPeople + rejectedPeople === people.length) {
+        console.log(
+          `${addedPeople} people were added in database. ${rejectedPeople} people not added in database.`,
+        );
+        resolve();
+      }
+    };
+
+    people.map((person) => {
+      createSelectObj(person);
+      return fetch(LINK_SERVER, {
+        method,
+        headers,
+        body: JSON.stringify(person),
+      })
+        .then(response => handleErrors(response))
+        .then((response) => {
+          addedPeople += 1;
+          finishAddData();
+          return response;
+        })
+        .catch((err) => {
+          rejectedPeople += 1;
+          finishAddData();
+          (console.log(`Data about ${person.name} not added in MongoDB. ${err}`));
+        });
+    });
   })
 );
 
@@ -103,8 +126,16 @@ const saveSelectObject = () => { // Save object to create select options
         body: JSON.stringify(selectObj),
       })
         .then(response => handleErrors(response))
-        .then(() => console.log('Select object was added in MongoDB'))
-        .catch(err => (console.log(`Select object not added in MongoDB. ${err}`))),
+        .then(() => {
+          console.log('Select object was added in MongoDB');
+          console.log('Close connection to Database');
+          mongoose.disconnect();
+        })
+        .catch((err) => {
+          console.log(`Select object not added in MongoDB. ${err}`);
+          console.log('Close connection to Database');
+          mongoose.disconnect();
+        }),
     );
 };
 
@@ -126,7 +157,11 @@ const putDataInDatabase = (resource) => { // Main function, which combine all st
     .then(() => (
       saveSelectObject()
     ))
-    .catch(err => `Something went wrong. ${err}`);
+    .catch((err) => {
+      console.log(`Something went wrong. ${err}`);
+      console.log('Close connection to Database');
+      mongoose.disconnect();
+    });
 };
 
 putDataInDatabase('people');

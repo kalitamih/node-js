@@ -4,7 +4,7 @@
 
 2. After get repository to localhost, install dependencies 'npm install'
 
-3. You can launch this application localle by 'npm start' or 'npm start devstart'
+3. You can launch this application locally by 'npm start' or 'npm start devstart'
 
 4. Script for fetching data from 'swapi.co' is inside folder 'data'. You can launch it by 'npm run getdata', but before you have to launch application in another window. I didn't make simultaneous launch both 'server' and 'script', because I need to see logs in the different windows.
 

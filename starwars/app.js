@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 const constants = require('./constants');
 
-const { LINK_MONGODB } = constants;
+const { LINK_MONGODB, LINK_SERVER } = constants;
 
 mongoose.connect(LINK_MONGODB, { useNewUrlParser: true }).then(() => {
   console.log('Connected to Database');
@@ -33,7 +33,7 @@ app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res) => {
-  res.status(404).render('error');
+  res.status(404).render('error', { link: LINK_SERVER });
 });
 
 module.exports = app;

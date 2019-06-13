@@ -1,4 +1,7 @@
 const People = require('../models/people');
+const constants = require('../constants');
+
+const { LINK_SERVER } = constants;
 
 exports.postAddPeople = (req, res) => {
   const {
@@ -52,12 +55,17 @@ exports.postDisplayPeople = (req, res) => {
       if (people.length) {
         res.render('people', {
           people: JSON.stringify(people),
+          link: LINK_SERVER,
         });
       } else {
-        res.render('nothing');
+        res.render('nothing', {
+          link: LINK_SERVER,
+        });
       }
     })
     .catch(() => {
-      res.status(500).render('error');
+      res.status(500).render('error', {
+        link: LINK_SERVER,
+      });
     });
 };

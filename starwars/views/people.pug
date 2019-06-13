@@ -9,7 +9,7 @@ html(lang='en')
       integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T',
       crossorigin='anonymous',
     )
-  body
+  body  
   mixin card(person)    
     div.card(style='width: 18rem;')
       img.card-img-top(
@@ -25,10 +25,11 @@ html(lang='en')
           li.list-group-item.person Mass: #{person.mass}  
           li.list-group-item.person Eyes: #{person.eye_color}
           li.list-group-item.person Hair: #{person.hair_color}
-          li.list-group-item.person Skin: #{person.skin_color}           
-    
+          li.list-group-item.person Skin: #{person.skin_color}      
   
-  a(href='http://localhost:3000').btn.btn-primary.link Back
+  a(href= link).btn.btn-primary.link Back
   div.people
     for item in JSON.parse(people)      
       +card(item)
+
+  

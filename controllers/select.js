@@ -4,35 +4,6 @@ const constants = require('../constants');
 
 const { LINK_SERVER } = constants;
 
-exports.postAddSelect = (req, res) => {
-  const {
-    name, birth_year, eye_color,
-    gender, hair_color, height,
-    mass, skin_color, count,
-  } = req.body;
-  const people = new Select({
-    name,
-    birth_year,
-    eye_color,
-    gender,
-    hair_color,
-    height,
-    mass,
-    skin_color,
-    count,
-  });
-  people
-    .save()
-    .then(() => {
-      console.log('Collection \'select\' was created');
-      res.status(201).send('Collection \'select\' was created');
-    })
-    .catch((err) => {
-      console.log(`Collection 'select' not created. ${err}`);
-      res.status(500).send(`Collection 'select' not created. ${err}`);
-    });
-};
-
 exports.getSelect = (req, res) => {
   Select.find()
     .exec()

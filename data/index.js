@@ -5,17 +5,12 @@ const People = require('../models/people');
 const Select = require('../models/select');
 const constants = require('../constants');
 
-const { LINK_MONGODB, LINK_SWAPI, LINK_SERVER } = constants;
+const { LINK_MONGODB, LINK_SWAPI } = constants;
 
 const { handleErrors } = require('./handleErrors');
 
 const { selectObj } = require('./selectObj');
 
-const headers = {
-  Accept: 'application/json, text/plain, */*',
-  'Content-Type': 'application/json',
-};
-const method = 'POST';
 const chunk = 10;
 
 mongoose.connect(LINK_MONGODB, { useNewUrlParser: true }).then(() => {
@@ -85,16 +80,13 @@ const reqAddRecords = people => ( // Add info about character in MongoDB (collec
 
     people.map((person) => {
       createSelectObj(person);
-      return fetch(LINK_SERVER, {
-        method,
-        headers,
-        body: JSON.stringify(person),
-      })
-        .then(response => handleErrors(response))
-        .then((response) => {
+      const docPerson = new People({ ...person });
+      return docPerson
+        .save()
+        .then(() => {
           addedPeople += 1;
           finishAddData();
-          return response;
+          return null;
         })
         .catch((err) => {
           rejectedPeople += 1;
@@ -119,13 +111,10 @@ const saveSelectObject = () => { // Save object to create select options
       console.log('Previous select object was removed from database succesfully');
       return null;
     })
-    .then(
-      fetch(`${LINK_SERVER}select/`, {
-        method,
-        headers,
-        body: JSON.stringify(selectObj),
-      })
-        .then(response => handleErrors(response))
+    .then(() => {
+      const docSelect = new Select({ ...selectObj });
+      docSelect
+        .save()
         .then(() => {
           console.log('Select object was added in MongoDB');
           console.log('Close connection to Database');
@@ -135,8 +124,8 @@ const saveSelectObject = () => { // Save object to create select options
           console.log(`Select object not added in MongoDB. ${err}`);
           console.log('Close connection to Database');
           mongoose.disconnect();
-        }),
-    );
+        });
+    });
 };
 
 const putDataInDatabase = (resource) => { // Main function, which combine all steps

@@ -1,4 +1,3 @@
-
 const Select = require('../models/select');
 
 const constants = require('../constants');

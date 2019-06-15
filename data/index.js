@@ -39,7 +39,7 @@ const createRequests = (count, url) => { // Creator request to fetch data from s
         .then(response => handleErrors(response))
         .then(body => body.json())
         .then(data => data.results)
-        .catch(err => (Console.log(`Data weren't fetched from chunk=${i}. ${err}`))),
+        .catch(err => (console.log(`Data weren't fetched from chunk=${i}. ${err}`))),
     );
   }
   return Promise.all(requestArray);

@@ -1,19 +1,9 @@
-doctype html  
-html(lang='en')  
- head
-   title Main page
-   link(rel='stylesheet', href='/stylesheets/select.css')
-   link(
-    rel='stylesheet',
-    href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css',
-    integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T',
-    crossorigin='anonymous',
-  )
- body
+extends base.pug
+block content
   form(action= link, method='POST', name='select')
     mixin select(title, options, name)
       div.select
-        h5= title           
+        h5 #{title}           
         select(name= name).select        
           for item in JSON.parse(options)      
             option(value= item, name= item)= item

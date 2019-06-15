@@ -1,15 +1,5 @@
-doctype html  
-html(lang='en')  
-  head
-    title People
-    link(rel='stylesheet', href='/stylesheets/people.css')
-    link(
-      rel='stylesheet',
-      href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css',
-      integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T',
-      crossorigin='anonymous',
-    )
-  body  
+extends base.pug
+block content
   mixin card(person)    
     div.card(style='width: 18rem;')
       img.card-img-top(
@@ -26,10 +16,8 @@ html(lang='en')
           li.list-group-item.person Eyes: #{person.eye_color}
           li.list-group-item.person Hair: #{person.hair_color}
           li.list-group-item.person Skin: #{person.skin_color}      
-  
+
   a(href= link).btn.btn-primary.link Back
   div.people
     for item in JSON.parse(people)      
       +card(item)
-
-  

@@ -1,8 +1,60 @@
 body {
-  padding: 50px;
+  padding: 5px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+form {
+  margin: 0 auto;
+  width: 350px;
+}
+
+select {
+  height: 25px;
+  width: 100px;  
+}
+
+.select {  
+  width: 270px;
+  margin: 3px auto; 
+}
+
+.button.btn {
+  display: block;
+  margin: 20px auto;
+  width: 100px;
+  height: 50px;
+  font-size: 20px;
+}
+
+.person {
+  font-size: 16px;
+}
+
+.people {   
+  display: flex;
+  flex-direction: row; 
+  flex-wrap: wrap; 
+  justify-content: center;
+  text-align: center;
+}
+
+.card {
+  margin: 20px 10px;
+}
+
+.link {
+  margin: 10px;
+  width: 80px;
+  height: 40px;
+  font-size: 20px;  
+}
+
+h1 {
+  margin: 0 auto;
+  text-align: center;
+  color: #e59400;
 }
